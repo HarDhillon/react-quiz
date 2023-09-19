@@ -10,6 +10,7 @@ function Button({
     danger,
     outline,
     rounded,
+    disabled,
     ...rest
 }) {
     const classes = twMerge(
@@ -28,6 +29,7 @@ function Button({
             "text-red-500": outline && danger,
         })
     );
+
     return (
         <button {...rest} className={classes}>
             {children}
