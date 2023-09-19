@@ -2,10 +2,15 @@ import { useEffect } from "react"
 import { useFetchQuestionsQuery } from "../store";
 import SelectList from "../components/SelectList";
 import Question from "../components/Question"
+import Button from "../components/Button";
 
 function QuizPage() {
-    
+
     // const { data, error, isFetching } = useFetchQuestionsQuery(options)
+
+    const handleSubmit = () => {
+        console.log("form submitted")
+    }
 
     const questionsMax = 50
 
@@ -35,23 +40,27 @@ function QuizPage() {
         { value: '30', label: 'Science: Gadgets' },
         { value: '31', label: 'Entertainment: Japanese Anime &amp; Manga' },
         { value: '32', label: 'Entertainment: Cartoon &amp; Animations' }
-      ]
+    ]
 
     const questionsDifficulty = [
         { value: "any", label: "Any" }, { value: "easy", label: "Easy" }, { value: "medium", label: "Medium" }, { value: "hard", label: "Hard" }
     ]
 
     const questionsType = [
-        {value: "any" , label: "Any" }, {value: "multiple" , label: "Multiple Choice" }, {value: "boolean" , label: "True / False" }
+        { value: "any", label: "Any" }, { value: "multiple", label: "Multiple Choice" }, { value: "boolean", label: "True / False" }
     ]
 
 
 
     return (
         <div>
-            <SelectList options={questionsCategory} ></SelectList>
-            <SelectList options={questionsDifficulty}></SelectList>
-            <SelectList options={questionsType}></SelectList>
+            <form onSubmit={handleSubmit}>
+                <SelectList options={questionsCategory} ></SelectList>
+                <SelectList options={questionsDifficulty}></SelectList>
+                <SelectList options={questionsType}></SelectList>
+
+                <Button>Generate Questions</Button>
+            </form>
         </div>
     )
 }
