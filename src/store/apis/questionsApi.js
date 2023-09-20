@@ -11,8 +11,8 @@ const questionsApi = createApi({
                 // options = { amount: 50, category: 23 }
                 query: (options) => {
                     return {
-                        // ?amount=50&category=23&difficulty=medium&type=multiple
-                        params: {...options},
+                        url: "/",
+                        params: { ...options },
                         method: "GET"
                     }
                 }
