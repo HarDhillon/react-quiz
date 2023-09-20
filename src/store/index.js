@@ -1,7 +1,7 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { questionsApi } from "./apis/questionsApi";
-import { configReducer, changeAmount, changeCategory, changeDifficulty, changeType } from "./slices/configSlice";
+import { configReducer, changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted } from "./slices/configSlice";
 
 export const store = configureStore({
     reducer: {
@@ -20,4 +20,4 @@ export {
     useFetchQuestionsQuery
 } from "./apis/questionsApi"
 
-export { changeAmount, changeCategory, changeDifficulty, changeType }
+export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted }

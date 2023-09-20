@@ -6,7 +6,8 @@ const configSlice = createSlice({
         amount: 1,
         category: "any",
         difficulty: "any",
-        type: "any"
+        type: "any",
+        submitted: false
     },
     reducers: {
         changeAmount(state, action) {
@@ -20,9 +21,12 @@ const configSlice = createSlice({
         },
         changeType(state, action) {
             state.type = action.payload
-        }
+        },
+        changeSubmitted(state, action) {
+            state.submitted = action.payload
+        },
     }
 })
 
-export const { changeAmount, changeCategory, changeDifficulty, changeType } = configSlice.actions
+export const { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted } = configSlice.actions
 export const configReducer = configSlice.reducer;
