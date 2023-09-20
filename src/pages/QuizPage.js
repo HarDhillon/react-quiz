@@ -1,14 +1,20 @@
-import { useState } from "react"
 import QuizOptions from "../components/QuizOptions";
-import Button from "../components/Button";
-import QuestionList from "../components/QuestionList";
+import { useSelector } from "react-redux"
+import Question from "../components/Question";
 
 
 function QuizPage() {
 
 
+    const showQuiz = useSelector((state) => {
+        return state.config.submitted
+    })
+
     return (
-        <QuizOptions />
+        <>
+            <QuizOptions />
+            {showQuiz ? <Question /> : ''}
+        </>
     )
 }
 

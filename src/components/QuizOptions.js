@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { changeAmount, changeCategory, changeDifficulty, changeType } from '../store'
+import { changeAmount, changeCategory, changeDifficulty, changeSubmitted, changeType } from '../store'
 import Button from "./Button"
 
 
-function SelectList({ config }) {
+function SelectList() {
 
     const optionsCategory = [
         { value: 'any', label: 'Any Category' },
@@ -43,14 +43,6 @@ function SelectList({ config }) {
         { value: "any", label: "Any" }, { value: "multiple", label: "Multiple Choice" }, { value: "boolean", label: "True / False" }
     ]
 
-
-    // const handleOnChange = event => {
-    //     const re = /^[0-9\b]+$/;
-    //     if (event.target.value === '' || re.test(event.target.value)) {
-    //         setNumberOfQuestions(event.target.value)
-    //     }
-
-    // }
 
     const dispatch = useDispatch()
 
@@ -98,9 +90,8 @@ function SelectList({ config }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        dispatch(changeSubmitted(true))
     }
-
-    console.log(`${amount} ${category} ${difficulty} ${type}`)
 
 
     const categoryItems = optionsCategory.map((item) => {
