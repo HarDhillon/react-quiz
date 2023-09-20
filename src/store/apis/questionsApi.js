@@ -10,9 +10,17 @@ const questionsApi = createApi({
             fetchQuestions: builder.query({
                 // options = { amount: 50, category: 23 }
                 query: (options) => {
+                    // Filter out options with values equal to "any"
+                    const filteredOptions = Object.keys(options).reduce((acc, key) => {
+                        if (options[key] !== "any") {
+                            acc[key] = options[key];
+                        }
+                        return acc;
+                    }, {});
+
                     return {
-                        url: "/",
-                        params: { ...options },
+                        url: "",
+                        params: filteredOptions,
                         method: "GET"
                     }
                 }
