@@ -1,60 +1,42 @@
-import { useFetchQuestionsQuery } from "../store"
-import { useSelector } from "react-redux"
+function Question({ question }) {
 
-function Question() {
+    // Shuffle array method
+    const shuffleArray = (array) => {
+        const shuffledArray = [...array];
 
-    const amount = useSelector((state) => {
-        return state.config.amount
-    })
-    const category = useSelector((state) => {
-        return state.config.category
-    })
-    const difficulty = useSelector((state) => {
-        return state.config.difficulty
-    })
-    const type = useSelector((state) => {
-        return state.config.type
-    })
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
 
-    const options = { category, difficulty, type, amount }
-
-    const { data, isFetching, error } = useFetchQuestionsQuery(options)
-
-    let content
-
-    if (error) {
-        content = <div>Error fetching Questions</div>;
-        console.log(error)
+        return shuffledArray;
     }
-    if (isFetching) {
-        content = <div>Loading Questions...</div>
-    }
-    else {
-        console.log(data.results)
-        content = data.results.map((question, index) => {
 
-            const choices = [
-                question.correct_answer,
-                ...question.incorrect_answers
-            ];
+    // Create an array of choices and shuffle them
+    const choices = [
+        question.correct_answer,
+        ...question.incorrect_answers
+    ];
+    const shuffledChoices = shuffleArray(choices)
 
-            const renderedChoices = choices.map((choice) => {
-                return <div>{choice}</div>
-            })
+    console.log(shuffledChoices)
 
-            return <div key={index}>
-                <div className="flex my-5" >
-                    <h1 className="mr-2">Category: {question.category}</h1>
-                    <h3>Difficulty {question.difficulty}</h3>
+    const renderedChoices = shuffledChoices.map((choice, index) => {
+        return <div key={index}>{choice}</div>
+    })
 
-                </div>
-                <h5>{question.question}</h5>
-                <div>{renderedChoices} </div>
+    return (
+        <div>
+            <div className="flex my-5" >
+                <h1 className="mr-2">Category: {question.category}</h1>
+                <h3>Difficulty {question.difficulty}</h3>
             </div>
-        })
-    }
+            <h5>{question.question}</h5>
+            <div>{renderedChoices} </div>
+        </div>
+    )
 
-    return <div>{content}</div>
+
 }
 
 export default Question

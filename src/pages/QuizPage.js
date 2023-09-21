@@ -1,6 +1,7 @@
 import QuizOptions from "../components/QuizOptions";
 import { useSelector } from "react-redux"
 import Question from "../components/Question";
+import QuestionList from "../components/QuestionList";
 
 
 function QuizPage() {
@@ -13,7 +14,7 @@ function QuizPage() {
     return (
         <>
             <QuizOptions />
-            {showQuiz ? <Question /> : ''}
+            {showQuiz ? <QuestionList /> : ''}
         </>
     )
 }
