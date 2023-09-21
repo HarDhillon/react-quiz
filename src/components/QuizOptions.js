@@ -76,17 +76,21 @@ function SelectList() {
         }
 
         dispatch(changeAmount(number))
+        dispatch(changeSubmitted(false))
     }
     const handleCategoryClick = (e) => {
         dispatch(changeCategory(e.target.value))
+        dispatch(changeSubmitted(false))
     }
 
     const handleDifficultyClick = (e) => {
         dispatch(changeDifficulty(e.target.value))
+        dispatch(changeSubmitted(false))
     }
 
     const handleTypeclick = (e) => {
         dispatch(changeType(e.target.value))
+        dispatch(changeSubmitted(false))
     }
 
     const handleSubmit = (e) => {
@@ -109,19 +113,32 @@ function SelectList() {
 
 
     return (
-        <Panel>
+        <Panel className={"p-5"}>
             <form onSubmit={handleSubmit}>
-                <label>Number of Questions (1 - 50)</label>
-                <input value={amount || 1} onChange={handleNumberChange}></input>
+                <div className="flex flex-wrap justify-between mb-4">
+                    <div className="form-field">
+                        <label>Number of Questions (1 - 50)</label>
+                        <input className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black" value={amount || 1} onChange={handleNumberChange}></input>
+                    </div>
 
-                <label>Category</label>
-                <select>{categoryItems}</select>
+                    <div className="form-field">
+                        <label>Category</label>
+                        <select className="p-3">{categoryItems}</select>
+                    </div>
 
-                <label>Difficulty</label>
-                <select>{difficultyItems}</select>
+                    <div className="form-field">
+                        <label>Difficulty</label>
+                        <select className="p-3">{difficultyItems}</select>
+                    </div>
 
-                <label>Type</label>
-                <select>{typeItems}</select>
+                    <div className="form-field">
+                        <label>Type</label>
+                        <select className="p-3">{typeItems}</select>
+                    </div>
+
+                </div>
+
+
 
                 <Button>Generate Questions</Button>
             </form>
