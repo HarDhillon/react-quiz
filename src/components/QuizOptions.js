@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { changeAmount, changeCategory, changeDifficulty, changeSubmitted, changeType } from '../store'
 import Button from "./Button"
+import Panel from "./Panel"
 
 
 function SelectList() {
@@ -108,21 +109,24 @@ function SelectList() {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Number of Questions (1 - 50)</label>
-            <input value={amount || 1} onChange={handleNumberChange}></input>
+        <Panel>
+            <form onSubmit={handleSubmit}>
+                <label>Number of Questions (1 - 50)</label>
+                <input value={amount || 1} onChange={handleNumberChange}></input>
 
-            <label>Category</label>
-            <select>{categoryItems}</select>
+                <label>Category</label>
+                <select>{categoryItems}</select>
 
-            <label>Difficulty</label>
-            <select>{difficultyItems}</select>
+                <label>Difficulty</label>
+                <select>{difficultyItems}</select>
 
-            <label>Type</label>
-            <select>{typeItems}</select>
+                <label>Type</label>
+                <select>{typeItems}</select>
 
-            <Button>Generate Questions</Button>
-        </form>
+                <Button>Generate Questions</Button>
+            </form>
+
+        </Panel>
 
     )
 }
