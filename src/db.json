@@ -1,5 +1,32 @@
 {
-    "leaderboard": [
-        
-    ]
+    "leaderboard": {
+        "easy": [
+            {
+                "name": "Person1",
+                "score": "20",
+                "id": "3"
+            }
+        ],
+        "medium": [
+            {
+                "name": "Person2",
+                "score": "50",
+                "id": "5"
+            }
+        ],
+        "hard": [
+            {
+                "name": "Person3",
+                "score": "80",
+                "id": "8"
+            }
+        ],
+        "any": [
+            {
+                "name": "Person4",
+                "score": "15",
+                "id": "13"
+            }
+        ]
+    }
 }
