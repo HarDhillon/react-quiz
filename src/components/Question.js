@@ -1,28 +1,33 @@
-function Question({ question }) {
+import { useState } from "react";
+import { GoCheckCircle, GoXCircle } from "react-icons/go";
 
-    // Shuffle array method
-    const shuffleArray = (array) => {
-        const shuffledArray = [...array];
+function Question({ question, shuffledChoices }) {
 
-        for (let i = shuffledArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    const [selectedChoice, setSelectedChoice] = useState(false)
+    const [userCorrect, setUserCorrect] = useState(false)
+
+    const handleClick = (choice) => {
+
+        if (selectedChoice === true) {
+            return
         }
+        if (choice === question.correct_answer) {
+            setUserCorrect(true)
+        }
+        setSelectedChoice(true)
 
-        return shuffledArray;
     }
 
-    // Create an array of choices and shuffle them
-    const choices = [
-        question.correct_answer,
-        ...question.incorrect_answers
-    ];
-    const shuffledChoices = shuffleArray(choices)
-
-    console.log(shuffledChoices)
 
     const renderedChoices = shuffledChoices.map((choice, index) => {
-        return <div key={index}>{choice}</div>
+        // Determine if this choice is the correct answer or not
+        const isCorrect = choice === question.correct_answer;
+
+
+        return <div
+            className={`hover:cursor-pointer hover:bg-gray-300 ${isCorrect && selectedChoice ? 'correct' : ''}${selectedChoice && !isCorrect ? 'incorrect' : ''}`}
+            onClick={() => handleClick(choice)} key={index}>{choice}
+        </div>
     })
 
     return (
@@ -31,7 +36,10 @@ function Question({ question }) {
                 <h1 className="mr-2">Category: {question.category}</h1>
                 <h3>Difficulty {question.difficulty}</h3>
             </div>
-            <h5>{question.question}</h5>
+            <div className="flex">
+                <h5>{question.question}</h5>
+                <p className="ml-2">{userCorrect && selectedChoice ? 'Correct' : ""}{selectedChoice && !userCorrect ? "Wrong" : ''} </p>
+            </div>
             <div>{renderedChoices} </div>
         </div>
     )

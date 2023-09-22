@@ -4,6 +4,20 @@ import Question from "./Question"
 
 function QuestionList() {
 
+    // Shuffle array method
+    const shuffleArray = (array) => {
+        const shuffledArray = [...array];
+
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+
+        return shuffledArray;
+    }
+
+
+
     // Grab our state
     const amount = useSelector((state) => {
         return state.config.amount
@@ -35,8 +49,16 @@ function QuestionList() {
     }
     // If call was successfull pass Question each question and render it
     else {
-        content = data.results.map((question) => {
-            return <Question question={question}></Question>
+        content = data.results.map((question, index) => {
+
+            // Create an array of choices and shuffle them
+            const choices = [
+                question.correct_answer,
+                ...question.incorrect_answers
+            ];
+            const shuffledChoices = shuffleArray(choices)
+
+            return <Question key={index} shuffledChoices={shuffledChoices} question={question}></Question>
         })
     }
 
