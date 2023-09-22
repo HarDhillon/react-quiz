@@ -2,12 +2,12 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { questionsApi } from "./apis/questionsApi";
 import { configReducer, changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted } from "./slices/configSlice";
-import { scoreReducer, changeScore } from "./slices/scoreSlice";
+import { quizReducer, changeUserScore } from "./slices/quizSlice";
 
 export const store = configureStore({
     reducer: {
         config: configReducer,
-        score: scoreReducer,
+        quiz: quizReducer,
         [questionsApi.reducerPath]: questionsApi.reducer
     },
     middleware: (getDefaultMiddleware) => {
@@ -22,4 +22,4 @@ export {
     useFetchQuestionsQuery
 } from "./apis/questionsApi"
 
-export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted, changeScore }
+export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted, changeUserScore }

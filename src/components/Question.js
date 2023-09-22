@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
+import { changeUserScore } from "../store";
+import { useDispatch, useSelector } from "react-redux";
 
 function Question({ question, shuffledChoices }) {
 
     const [selectedChoice, setSelectedChoice] = useState(false)
     const [userCorrect, setUserCorrect] = useState(false)
 
-    const handleClick = (choice) => {
+    const dispatch = useDispatch()
 
+    const handleClick = (choice) => {
+        // Return if question is already answered
         if (selectedChoice === true) {
             return
         }
+        // If correct answer
         if (choice === question.correct_answer) {
             setUserCorrect(true)
+            dispatch(changeUserScore())
         }
         setSelectedChoice(true)
 
@@ -38,7 +44,7 @@ function Question({ question, shuffledChoices }) {
             </div>
             <div className="flex">
                 <h5>{question.question}</h5>
-                <p className="ml-2">{userCorrect && selectedChoice ? 'Correct' : ""}{selectedChoice && !userCorrect ? "Wrong" : ''} </p>
+                <p className="ml-2">{userCorrect && selectedChoice ? <GoCheckCircle className="text-2xl text-green-600" /> : ""}{selectedChoice && !userCorrect ? <GoXCircle className="text-2xl text-red-600" /> : ''} </p>
             </div>
             <div>{renderedChoices} </div>
         </div>
