@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { changeAmount, changeCategory, changeDifficulty, changeSubmitted, changeType } from '../store'
+import { changeAmount, changeCategory, changeDifficulty, changeQuestionsAnswered, changeSubmitted, changeType, changeUserScore } from '../store'
 import Button from "./Button"
 import Panel from "./Panel"
 
@@ -50,18 +50,12 @@ function SelectList() {
     const amount = useSelector((state) => {
         return state.config.amount
     })
-    const category = useSelector((state) => {
-        return state.config.category
-    })
-    const difficulty = useSelector((state) => {
-        return state.config.difficulty
-    })
 
-    const type = useSelector((state) => {
-        return state.config.type
-    })
-
-    // console.log(category)
+    const resetQuiz = () => {
+        dispatch(changeSubmitted(false))
+        dispatch(changeQuestionsAnswered(0))
+        dispatch(changeUserScore(0))
+    }
 
     const handleNumberChange = (e) => {
         // const re = /^[0-9\b]+$/;
@@ -76,21 +70,21 @@ function SelectList() {
         }
 
         dispatch(changeAmount(number))
-        dispatch(changeSubmitted(false))
+        resetQuiz()
     }
     const handleCategoryClick = (e) => {
         dispatch(changeCategory(e.target.value))
-        dispatch(changeSubmitted(false))
+        resetQuiz()
     }
 
     const handleDifficultyClick = (e) => {
         dispatch(changeDifficulty(e.target.value))
-        dispatch(changeSubmitted(false))
+        resetQuiz()
     }
 
     const handleTypeclick = (e) => {
         dispatch(changeType(e.target.value))
-        dispatch(changeSubmitted(false))
+        resetQuiz()
     }
 
     const handleSubmit = (e) => {

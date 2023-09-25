@@ -4,17 +4,27 @@ const quizSlice = createSlice({
     name: "quiz",
     initialState: {
         userScore: 0,
-        complete: false
+        questionsAnswered: 0
     },
     reducers: {
         changeUserScore(state, action) {
-            state.userScore += 1
+            if (action.payload === 0) {
+                state.userScore = 0
+            }
+            else {
+                state.userScore += 1
+            }
         },
-        changeComplete(state, action) {
-            state.complete = action.payload
+        changeQuestionsAnswered(state, action) {
+            if (action.payload === 0) {
+                state.questionsAnswered = 0
+            }
+            else {
+                state.questionsAnswered += 1
+            }
         }
     }
 })
 
-export const { changeUserScore, changeComplete } = quizSlice.actions
+export const { changeUserScore, changeQuestionsAnswered } = quizSlice.actions
 export const quizReducer = quizSlice.reducer;

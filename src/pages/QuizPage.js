@@ -10,13 +10,14 @@ function QuizPage() {
         return state.config.submitted
     })
 
-    const complete = useSelector((state) => {
-        return state.questions.complete
-    })
-
-    const totalQuestion = useSelector((state) => {
+    const totalQuestions = useSelector((state) => {
         return state.config.amount
     })
+
+    // Quiz is complete when user has answered all question
+    const complete = useSelector((state => {
+        return state.quiz.questionsAnswered === totalQuestions
+    }))
 
     const userScore = useSelector((state) => {
         return state.quiz.userScore
@@ -26,8 +27,9 @@ function QuizPage() {
     return (
         <>
             <QuizOptions />
-            <div> {userScore} / {totalQuestion}</div>
             {showQuiz ? <QuestionList /> : ''}
+
+            <div> {complete ? `${userScore} / ${totalQuestions}` : ''}  </div>
         </>
     )
 }

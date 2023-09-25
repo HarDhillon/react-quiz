@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
-import { changeUserScore } from "../store";
-import { useDispatch, useSelector } from "react-redux";
+import { changeUserScore, changeQuestionsAnswered } from "../store";
+import { useDispatch } from "react-redux";
 
 function Question({ question, shuffledChoices }) {
 
@@ -21,7 +21,9 @@ function Question({ question, shuffledChoices }) {
             // Add to user score
             dispatch(changeUserScore())
         }
+        // Once user answered question
         setSelectedChoice(true)
+        dispatch(changeQuestionsAnswered())
 
     }
 
