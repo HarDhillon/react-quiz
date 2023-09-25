@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const quizSlice = createSlice({
-    name: "questions",
+    name: "quiz",
     initialState: {
         userScore: 0,
         complete: false

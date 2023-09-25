@@ -1,10 +1,10 @@
-import { useFetchQuestionsQuery } from "../store"
-import { changeComplete } from "../store"
-import { useSelector } from "react-redux"
-import Question from "./Question"
+import { useFetchQuestionsQuery } from "../store";
+import { changeComplete } from "../store";
+import { useSelector } from "react-redux";
+import Question from "./Question";
+import { useMemo } from "react";
 
 function QuestionList() {
-
     // Shuffle array method
     const shuffleArray = (array) => {
         const shuffledArray = [...array];
@@ -15,53 +15,63 @@ function QuestionList() {
         }
 
         return shuffledArray;
-    }
+    };
 
     // Grab our Quiz Config State
     const amount = useSelector((state) => {
-        return state.config.amount
-    })
+        return state.config.amount;
+    });
     const category = useSelector((state) => {
-        return state.config.category
-    })
+        return state.config.category;
+    });
     const difficulty = useSelector((state) => {
-        return state.config.difficulty
-    })
+        return state.config.difficulty;
+    });
     const type = useSelector((state) => {
-        return state.config.type
-    })
-
+        return state.config.type;
+    });
 
     // Get our form options state and fetch from the API
-    const options = { category, difficulty, type, amount }
-    const { data, isFetching, error } = useFetchQuestionsQuery(options)
+    const options = { category, difficulty, type, amount };
+    const { data, isFetching, error } = useFetchQuestionsQuery(options);
 
-    let content
+    // Calculate shuffledChoices for each question using useMemo to ensure choices are not shuffled when component re-renders
+    const questionsWithShuffledChoices = useMemo(() => {
+        if (error) {
+            console.log(error);
+            return [];
+        } else if (isFetching) {
+            return [];
+        } else {
+            // for each object shuffle the choices and return and object with the question and shuffled choices
+            return data.results.map((question) => {
+                const choices = [question.correct_answer, ...question.incorrect_answers];
+                const shuffledChoices = shuffleArray(choices);
 
-    // Determine what the API call returned
-    if (error) {
-        console.log(error)
-        content = <div>Error loading data</div>
-    }
-    else if (isFetching) {
-        content = <div>Loading...</div>
-    }
-    // If call was successfull pass Question each question and render it
-    else {
-        content = data.results.map((question, index) => {
+                return {
+                    question,
+                    shuffledChoices,
+                };
+            });
+        }
+    }, [data, error, isFetching]);
 
-            // Create an array of choices and shuffle them
-            const choices = [
-                question.correct_answer,
-                ...question.incorrect_answers
-            ];
-            const shuffledChoices = shuffleArray(choices)
-
-            return <Question key={index} shuffledChoices={shuffledChoices} question={question}></Question>
-        })
-    }
-
-    return <div>{content}</div>
+    return (
+        <div>
+            {/* Display error message if there is an error */}
+            {error && <div>Error loading data</div>}
+            {/* Display "Loading..." text while isFetching is true */}
+            {isFetching && <div>Loading...</div>}
+            {/* Render questions if there are no errors and not loading */}
+            {!error && !isFetching && questionsWithShuffledChoices.map((item, index) => (
+                <Question
+                    key={index}
+                    shuffledChoices={item.shuffledChoices}
+                    question={item.question}
+                ></Question>
+            ))}
+        </div>
+    );
 }
 
-export default QuestionList
+export default QuestionList;
