@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { questionsApi } from "./apis/questionsApi";
 import { configReducer, changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted } from "./slices/configSlice";
-import { quizReducer, changeUserScore } from "./slices/quizSlice";
+import { quizReducer, changeUserScore, changeComplete } from "./slices/quizSlice";
 
 export const store = configureStore({
     reducer: {
@@ -22,4 +22,7 @@ export {
     useFetchQuestionsQuery
 } from "./apis/questionsApi"
 
-export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted, changeUserScore }
+// Quiz config
+export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted }
+// Quiz progress / score
+export { changeUserScore, changeComplete }

@@ -16,5 +16,5 @@ const quizSlice = createSlice({
     }
 })
 
-export const { changeUserScore } = quizSlice.actions
+export const { changeUserScore, changeComplete } = quizSlice.actions
 export const quizReducer = quizSlice.reducer;

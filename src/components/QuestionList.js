@@ -1,4 +1,5 @@
 import { useFetchQuestionsQuery } from "../store"
+import { changeComplete } from "../store"
 import { useSelector } from "react-redux"
 import Question from "./Question"
 
@@ -16,9 +17,7 @@ function QuestionList() {
         return shuffledArray;
     }
 
-
-
-    // Grab our state
+    // Grab our Quiz Config State
     const amount = useSelector((state) => {
         return state.config.amount
     })

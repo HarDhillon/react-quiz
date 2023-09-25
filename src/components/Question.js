@@ -18,6 +18,7 @@ function Question({ question, shuffledChoices }) {
         // If correct answer
         if (choice === question.correct_answer) {
             setUserCorrect(true)
+            // Add to user score
             dispatch(changeUserScore())
         }
         setSelectedChoice(true)
