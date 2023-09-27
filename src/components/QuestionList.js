@@ -77,12 +77,16 @@ function QuestionList() {
             {isFetching && <div>Loading...</div>}
             {/* Render questions if there are no errors and not loading */}
             {!error && !isFetching && (
-                <Question
-                    shuffledChoices={questionDetails.shuffledChoices}
-                    question={questionDetails.question}
-                    selectedChoice={selectedChoice}
-                    setSelectedChoice={setSelectedChoice}
-                ></Question>
+                <div>
+                    Question {questionsAnswered + 1} / {amount}
+                    <Question
+                        shuffledChoices={questionDetails.shuffledChoices}
+                        question={questionDetails.question}
+                        selectedChoice={selectedChoice}
+                        setSelectedChoice={setSelectedChoice}
+
+                    ></Question>
+                </div>
             )}
         </div>
     );
