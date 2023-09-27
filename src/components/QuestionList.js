@@ -1,9 +1,12 @@
 import { useFetchQuestionsQuery } from "../store";
 import { useSelector } from "react-redux";
 import Question from "./Question";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 function QuestionList() {
+
+    const [selectedChoice, setSelectedChoice] = useState(false)
+
     // Shuffle array method
     const shuffleArray = (array) => {
         const shuffledArray = [...array];
@@ -15,6 +18,10 @@ function QuestionList() {
 
         return shuffledArray;
     };
+
+    const questionsAnswered = useSelector((state) => {
+        return state.quiz.questionsAnswered
+    })
 
     // Grab our Quiz Config State
     const amount = useSelector((state) => {
@@ -55,6 +62,13 @@ function QuestionList() {
         }
     }, [data, error, isFetching]);
 
+    const questionDetails = questionsWithShuffledChoices[questionsAnswered]
+
+    // When questionDetails is updated we want to reset setSelectedChoice back to false
+    useEffect(() => {
+        setSelectedChoice(false);
+    }, [questionDetails]);
+
     return (
         <div>
             {/* Display error message if there is an error */}
@@ -62,13 +76,14 @@ function QuestionList() {
             {/* Display "Loading..." text while isFetching is true */}
             {isFetching && <div>Loading...</div>}
             {/* Render questions if there are no errors and not loading */}
-            {!error && !isFetching && questionsWithShuffledChoices.map((item, index) => (
+            {!error && !isFetching && (
                 <Question
-                    key={index}
-                    shuffledChoices={item.shuffledChoices}
-                    question={item.question}
+                    shuffledChoices={questionDetails.shuffledChoices}
+                    question={questionDetails.question}
+                    selectedChoice={selectedChoice}
+                    setSelectedChoice={setSelectedChoice}
                 ></Question>
-            ))}
+            )}
         </div>
     );
 }

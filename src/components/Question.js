@@ -3,9 +3,9 @@ import { GoCheckCircle, GoXCircle } from "react-icons/go";
 import { changeUserScore, changeQuestionsAnswered } from "../store";
 import { useDispatch } from "react-redux";
 
-function Question({ question, shuffledChoices }) {
+function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice }) {
 
-    const [selectedChoice, setSelectedChoice] = useState(false)
+
     const [userCorrect, setUserCorrect] = useState(false)
 
     const dispatch = useDispatch()
@@ -21,9 +21,12 @@ function Question({ question, shuffledChoices }) {
             // Add to user score
             dispatch(changeUserScore())
         }
-        // Once user answered question
+        // Once user answered question 
         setSelectedChoice(true)
-        dispatch(changeQuestionsAnswered())
+        // Wait 2 seconds then show next question
+        setTimeout(function () {
+            dispatch(changeQuestionsAnswered())
+        }, 2000);
 
     }
 
