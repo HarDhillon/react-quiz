@@ -27,9 +27,9 @@ function QuizPage() {
     return (
         <>
             <QuizOptions />
-            {showQuiz ? <QuestionList /> : ''}
+            {showQuiz && !complete && <QuestionList />}
 
-            <div> {complete ? `${userScore} / ${totalQuestions}` : ''}  </div>
+            {complete && <div>Total Score: {complete ? `${userScore} / ${totalQuestions}` : ''}  </div>}
         </>
     )
 }

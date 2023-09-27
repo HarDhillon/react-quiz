@@ -3,10 +3,10 @@ import { GoCheckCircle, GoXCircle } from "react-icons/go";
 import { changeUserScore, changeQuestionsAnswered } from "../store";
 import { useDispatch } from "react-redux";
 
-function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice }) {
+function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice, userCorrect, setUserCorrect }) {
 
 
-    const [userCorrect, setUserCorrect] = useState(false)
+
 
     const dispatch = useDispatch()
 
