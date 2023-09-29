@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function CountdownTimer({ countdownStart }) {
     const [countdown, setCountDown] = useState(countdownStart)
@@ -20,12 +20,7 @@ function CountdownTimer({ countdownStart }) {
         return () => {
             clearInterval(timer);
         }
-    }, [countdown, countdownStart])
-
-    useEffect(() => {
-        // Reset the countdown when the countdownStart prop changes
-        setCountDown(countdownStart);
-    }, [countdownStart]);
+    }, [countdown])
 
     return (
         <div>

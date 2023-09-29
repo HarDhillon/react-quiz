@@ -10,9 +10,6 @@ function QuestionList() {
     const [selectedChoice, setSelectedChoice] = useState(false)
     const [userCorrect, setUserCorrect] = useState(false)
 
-    const countdownStart = 10
-
-
     // Grab our Quiz Config State and fetch questions with our API
     const { amount, category, difficulty, type } = useSelector((state) => state.config);
     const { data, isFetching, error } = useFetchQuestionsQuery({ amount, category, difficulty, type });
@@ -45,14 +42,14 @@ function QuestionList() {
     // We don't need to account for going outside the range as in QuizPage once the quiz is complete we will not render this component anymore
     const questionDetails = questionsWithShuffledChoices[questionsAnswered]
     // When questionDetails is updated to the next question we want to reset our states back to their original
+
+
     useEffect(() => {
         setSelectedChoice(false);
         setUserCorrect(false)
     }, [questionDetails]);
 
 
-
-    // TODO Mark question as wrong once timer reaches 0 - Could move selectedchoice and user correct to redux
 
     return (
         <div>
@@ -65,8 +62,8 @@ function QuestionList() {
                 <div>
                     Question {questionsAnswered + 1} / {amount}
 
-                    {/* TODO FIX COUNTDOWN TIMER NOT RESETTING */}
-                    <CountdownTimer countdownStart={countdownStart} />
+                    {/* Using key to re-render component when question changes, this resets timer */}
+                    <CountdownTimer key={questionDetails.question.question} countdownStart={10} />
 
                     <Question
                         shuffledChoices={questionDetails.shuffledChoices}
