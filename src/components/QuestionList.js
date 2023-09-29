@@ -1,14 +1,19 @@
 import Question from "./Question";
-import CountdownTimer from "./CountdownTimer";
+import QuestionTimer from "./QuestionTimer";
 import shuffleArray from "../hooks/shuffleArray";
 import { useFetchQuestionsQuery } from "../store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useMemo, useState, useEffect } from "react";
+import { changeQuestionTimeLeft } from "../store";
 
 function QuestionList() {
 
     const [selectedChoice, setSelectedChoice] = useState(false)
     const [userCorrect, setUserCorrect] = useState(false)
+
+    const dispatch = useDispatch()
+
+    const timeLeft = useSelector((state) => state.quiz.questionTimeLeft);
 
     // Grab our Quiz Config State and fetch questions with our API
     const { amount, category, difficulty, type } = useSelector((state) => state.config);
@@ -47,7 +52,8 @@ function QuestionList() {
     useEffect(() => {
         setSelectedChoice(false);
         setUserCorrect(false)
-    }, [questionDetails]);
+        dispatch(changeQuestionTimeLeft(15));
+    }, [questionDetails, dispatch]);
 
 
 
@@ -62,8 +68,8 @@ function QuestionList() {
                 <div>
                     Question {questionsAnswered + 1} / {amount}
 
-                    {/* Using key to re-render component when question changes, this resets timer */}
-                    <CountdownTimer key={questionDetails.question.question} countdownStart={10} />
+                    {timeLeft !== 0 ? <QuestionTimer /> : <div><h1>Times Up!</h1>
+                    </div>}
 
                     <Question
                         shuffledChoices={questionDetails.shuffledChoices}
@@ -72,6 +78,7 @@ function QuestionList() {
                         setSelectedChoice={setSelectedChoice}
                         userCorrect={userCorrect}
                         setUserCorrect={setUserCorrect}
+                        timeLeft={timeLeft}
 
                     ></Question>
                 </div>

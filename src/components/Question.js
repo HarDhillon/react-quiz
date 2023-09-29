@@ -2,8 +2,7 @@ import { GoCheckCircle, GoXCircle } from "react-icons/go";
 import { changeUserScore, changeQuestionsAnswered } from "../store";
 import { useDispatch } from "react-redux";
 
-function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice, userCorrect, setUserCorrect }) {
-
+function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice, userCorrect, setUserCorrect, timeLeft }) {
 
 
 
@@ -27,6 +26,17 @@ function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice
             dispatch(changeQuestionsAnswered())
         }, 2000);
 
+    }
+
+    // TODO figure out why shuffledchoices is going to the next one when timer runs out but not when clicking
+
+    if (timeLeft === 0) {
+        // Once user answered question 
+        setSelectedChoice(true)
+        // Wait 2 seconds then show next question
+        setTimeout(function () {
+            dispatch(changeQuestionsAnswered())
+        }, 2000);
     }
 
 

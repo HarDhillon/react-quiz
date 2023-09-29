@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { questionsApi } from "./apis/questionsApi";
 import { configReducer, changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted } from "./slices/configSlice";
-import { quizReducer, changeUserScore, changeQuestionsAnswered } from "./slices/quizSlice";
+import { quizReducer, changeUserScore, changeQuestionsAnswered, changeQuestionTimeLeft } from "./slices/quizSlice";
 
 export const store = configureStore({
     reducer: {
@@ -25,4 +25,4 @@ export {
 // Quiz config
 export { changeAmount, changeCategory, changeDifficulty, changeType, changeSubmitted }
 // Quiz progress / score
-export { changeUserScore, changeQuestionsAnswered }
+export { changeUserScore, changeQuestionsAnswered, changeQuestionTimeLeft }
