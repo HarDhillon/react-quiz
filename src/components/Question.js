@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
 import { changeUserScore, changeQuestionsAnswered } from "../store";
 import { useDispatch } from "react-redux";

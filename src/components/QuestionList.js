@@ -1,13 +1,16 @@
+import Question from "./Question";
+import CountdownTimer from "./CountdownTimer";
+import shuffleArray from "../hooks/shuffleArray";
 import { useFetchQuestionsQuery } from "../store";
 import { useSelector } from "react-redux";
-import Question from "./Question";
 import { useMemo, useState, useEffect } from "react";
-import shuffleArray from "../hooks/shuffleArray";
 
 function QuestionList() {
 
     const [selectedChoice, setSelectedChoice] = useState(false)
     const [userCorrect, setUserCorrect] = useState(false)
+
+    const countdownStart = 10
 
 
     // Grab our Quiz Config State and fetch questions with our API
@@ -41,12 +44,15 @@ function QuestionList() {
     // We can make use of questionsAnswered to pass Question a different item from the shuffled choices array
     // We don't need to account for going outside the range as in QuizPage once the quiz is complete we will not render this component anymore
     const questionDetails = questionsWithShuffledChoices[questionsAnswered]
-
     // When questionDetails is updated to the next question we want to reset our states back to their original
     useEffect(() => {
         setSelectedChoice(false);
         setUserCorrect(false)
     }, [questionDetails]);
+
+
+
+    // TODO Mark question as wrong once timer reaches 0 - Could move selectedchoice and user correct to redux
 
     return (
         <div>
@@ -58,6 +64,9 @@ function QuestionList() {
             {!error && !isFetching && (
                 <div>
                     Question {questionsAnswered + 1} / {amount}
+
+                    {/* TODO FIX COUNTDOWN TIMER NOT RESETTING */}
+                    <CountdownTimer countdownStart={countdownStart} />
 
                     <Question
                         shuffledChoices={questionDetails.shuffledChoices}
