@@ -9,9 +9,6 @@ function QuestionList() {
     const [selectedChoice, setSelectedChoice] = useState(false)
     const [userCorrect, setUserCorrect] = useState(false)
 
-    const questionsAnswered = useSelector((state) => {
-        return state.quiz.questionsAnswered
-    })
 
     // Grab our Quiz Config State and fetch questions with our API
     const { amount, category, difficulty, type } = useSelector((state) => state.config);
@@ -38,11 +35,14 @@ function QuestionList() {
         }
     }, [data, error, isFetching]);
 
+    const questionsAnswered = useSelector((state) => {
+        return state.quiz.questionsAnswered
+    })
     // We can make use of questionsAnswered to pass Question a different item from the shuffled choices array
     // We don't need to account for going outside the range as in QuizPage once the quiz is complete we will not render this component anymore
     const questionDetails = questionsWithShuffledChoices[questionsAnswered]
 
-    // When questionDetails is updated to the next question we want to reset our states back to false
+    // When questionDetails is updated to the next question we want to reset our states back to their original
     useEffect(() => {
         setSelectedChoice(false);
         setUserCorrect(false)
