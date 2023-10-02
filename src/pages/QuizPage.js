@@ -16,6 +16,7 @@ function QuizPage() {
 
     // Quiz is complete when user has answered all question
     const complete = useSelector((state => {
+        // console.log(state.quiz.questionsAnswered)
         return state.quiz.questionsAnswered === totalQuestions
     }))
 

@@ -1,42 +1,17 @@
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
-import { changeUserScore, changeQuestionsAnswered } from "../store";
-import { useDispatch } from "react-redux";
 
-function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice, userCorrect, setUserCorrect, timeLeft }) {
+import { useSelector } from "react-redux";
+import QuestionTimer from "./QuestionTimer";
 
+function Question({ question, shuffledChoices, selectedChoice, userCorrect, handleChoiceClick }) {
 
+    const timeLeft = useSelector((state) => state.quiz.questionTimeLeft);
 
-    const dispatch = useDispatch()
 
     const handleClick = (choice) => {
-        // Return if question is already answered
-        if (selectedChoice === true) {
-            return
+        if (timeLeft > 0) {
+            handleChoiceClick(choice); // Call the callback defined in QuestionList
         }
-        // If correct answer
-        if (choice === question.correct_answer) {
-            setUserCorrect(true)
-            // Add to user score
-            dispatch(changeUserScore())
-        }
-        // Once user answered question 
-        setSelectedChoice(true)
-        // Wait 2 seconds then show next question
-        setTimeout(function () {
-            dispatch(changeQuestionsAnswered())
-        }, 2000);
-
-    }
-
-    // TODO figure out why shuffledchoices is going to the next one when timer runs out but not when clicking
-
-    if (timeLeft === 0) {
-        // Once user answered question 
-        setSelectedChoice(true)
-        // Wait 2 seconds then show next question
-        setTimeout(function () {
-            dispatch(changeQuestionsAnswered())
-        }, 2000);
     }
 
 
@@ -53,6 +28,8 @@ function Question({ question, shuffledChoices, selectedChoice, setSelectedChoice
 
     return (
         <div>
+            {timeLeft !== 0 ? <QuestionTimer /> : <div><h1>Times Up!</h1></div>}
+
             <div className="flex my-5" >
                 <h1 className="mr-2">Category: {question.category}</h1>
                 <h3>Difficulty {question.difficulty}</h3>
