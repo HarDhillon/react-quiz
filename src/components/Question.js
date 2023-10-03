@@ -1,4 +1,5 @@
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
+import Card from "./Card";
 
 import { useSelector } from "react-redux";
 import QuestionTimer from "./QuestionTimer";
@@ -26,9 +27,10 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
         </div>
     })
 
-    return (
-        <div className="text-center rounded shadow-lg p-5">
+    const cardClass = userCorrect && selectedChoice ? 'bg-green-100' : selectedChoice && !userCorrect ? 'bg-red-100' : '';
 
+    return (
+        <Card className={cardClass} userCorrect={userCorrect} selectedChoice={selectedChoice}>
             {timeLeft !== 0 ? <QuestionTimer /> : <div><h1>Times Up!</h1></div>}
 
             <div className="flex my-5 justify-center" >
@@ -42,7 +44,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
             <div>{renderedChoices} </div>
 
 
-        </div>
+        </Card>
     )
 
 

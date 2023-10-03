@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 
-function Card({ children, className, ...rest }) {
+function Card({ children, className, userCorrect, selectedChoice, ...rest }) {
     const finalClassNames = classNames(
-        'border rounded p-3 shadow-2xl bg-white',
+        'border rounded p-6 text-center shadow-2xl',
         className
     );
 
