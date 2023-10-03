@@ -88,7 +88,7 @@ function QuestionList() {
 
 
     return (
-        <div>
+        <div className="flex flex-col grow justify-center items-center">
             {/* Display error message if there is an error */}
             {error && <div>Error loading data</div>}
             {/* Display "Loading..." text while isFetching is true */}

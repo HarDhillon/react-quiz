@@ -27,18 +27,21 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
     })
 
     return (
-        <div>
+        <div className="text-center rounded shadow-lg p-5">
+
             {timeLeft !== 0 ? <QuestionTimer /> : <div><h1>Times Up!</h1></div>}
 
-            <div className="flex my-5" >
+            <div className="flex my-5 justify-center" >
                 <h1 className="mr-2">Category: {question.category}</h1>
                 <h3>Difficulty {question.difficulty}</h3>
             </div>
-            <div className="flex">
-                <h5>{question.question}</h5>
+            <div className="flex mb-3">
+                <h5 className="text-lg font-bold">{question.question}</h5>
                 <p className="ml-2">{userCorrect && selectedChoice ? <GoCheckCircle className="text-2xl text-green-600" /> : ""}{selectedChoice && !userCorrect ? <GoXCircle className="text-2xl text-red-600" /> : ''} </p>
             </div>
             <div>{renderedChoices} </div>
+
+
         </div>
     )
 
