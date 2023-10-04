@@ -85,24 +85,21 @@ function QuestionList() {
         dispatch(changeQuestionTimeLeft(15));
     }, [questionDetails, dispatch]);
 
-
+    const questionNumber = <h2>{questionsAnswered + 1} / {amount}</h2>
 
     return (
-        <div className="flex flex-col grow justify-center items-center">
+        <div className="flex flex-col grow items-center">
             {/* Display error message if there is an error */}
             {error && <div>Error loading data</div>}
             {/* Display "Loading..." text while isFetching is true */}
             {isFetching && <div>Loading...</div>}
             {/* Render questions if there are no errors and not loading */}
             {!error && !isFetching && (
-                <div>
-                    Question {questionsAnswered + 1} / {amount}
-
-
-
+                <div className="w-[80vw]">
                     <Question
                         shuffledChoices={questionDetails.shuffledChoices}
                         question={questionDetails.question}
+                        questionNumber={questionNumber}
                         selectedChoice={selectedChoice}
                         userCorrect={userCorrect}
                         handleChoiceClick={handleChoiceClick}
