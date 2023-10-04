@@ -31,7 +31,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
 
     return (
         <Card className={cardClass} userCorrect={userCorrect} selectedChoice={selectedChoice}>
-            {timeLeft !== 0 ? <QuestionTimer /> : <div><h1>Times Up!</h1></div>}
+            {timeLeft !== 0 ? <QuestionTimer /> : <h3 className="font-bold text-left">Times Up!</h3>}
 
             <div className="flex my-5 justify-center" >
                 <h1 className="mr-2">Category: {question.category}</h1>

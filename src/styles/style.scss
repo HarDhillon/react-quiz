@@ -27,3 +27,28 @@ body{
 .incorrect{
     color: red;
 }
+
+.timer{
+    circle{
+        stroke-dasharray: 115;
+        animation: countdown 16s linear forwards;
+    }
+   
+}
+
+@keyframes countdown {
+    0% {
+      stroke-dashoffset: 0px;
+      stroke: green
+    }
+    40%{
+        stroke: green;
+    }
+    70%{
+        stroke: red;
+    }
+    100% {
+      stroke-dashoffset: 113px;
+      stroke: red;
+    }
+  }

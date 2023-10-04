@@ -29,9 +29,12 @@ function QuestionTimer() {
     }, [timeLeft, dispatch]);
 
     return (
-        <div>
-            <h1>Countdown Timer: {timeLeft}</h1>
-        </div>
+        <div className="flex relative">
+            <h3 className="w-[20px]">{timeLeft}</h3>
+            <svg className="timer w-[40px] h-[40px] absolute left-[-10px] top-[-8px]">
+                <circle strokeWidth={"2px"} stroke="black" fill="transparent" r="18" cx="20" cy="20"></circle>
+            </svg>
+        </div >
     );
 }
 
