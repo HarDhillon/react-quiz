@@ -20,13 +20,6 @@ body{
     }
 }
 
-.correct{
-    color: green;
-}
-
-.incorrect{
-    color: red;
-}
 
 .timer{
     circle{
@@ -41,15 +34,22 @@ body{
       stroke-dashoffset: 0px;
       stroke: green
     }
-    40%{
+    15%{
         stroke: green;
     }
-    70%{
+    33%{
+        stroke: orange;
+    }
+    45%{
+        stroke: orange;
+    }
+    66%{
         stroke: red;
     }
     100% {
+        stroke: red;
       stroke-dashoffset: 113px;
-      stroke: red;
+      stroke: rgb(42, 34, 34)(34, 28, 28);
     }
   }
 

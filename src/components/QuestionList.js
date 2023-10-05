@@ -39,13 +39,13 @@ function QuestionList() {
                 dispatch(changeUserScore());
             }
 
-            // 2 seconds after user clicked, reset choices
+            // 3 seconds after user clicked, reset choices
             setTimeout(() => {
                 dispatch(changeQuestionsAnswered());
                 setSelectedChoice(false); // Reset selectedChoice
                 setUserCorrect(false);   // Reset userCorrect
                 dispatch(changeQuestionTimeLeft(15));
-            }, 2000);
+            }, 3000);
         }
     };
 

@@ -22,7 +22,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
 
 
         return <div
-            className={`hover:cursor-pointer hover:bg-gray-300 ${isCorrect && selectedChoice ? 'correct' : ''}${selectedChoice && !isCorrect ? 'incorrect' : ''}`}
+            className={`hover:cursor-pointer hover:bg-gray-300 ${isCorrect && selectedChoice ? 'text-green-500 text-lg mt-2 mb-2' : ''}${selectedChoice && !isCorrect ? 'text-red-500' : ''}`}
             onClick={() => handleClick(choice)} key={index}>{choice}
         </div>
     })
