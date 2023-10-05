@@ -1,6 +1,7 @@
 import QuizOptions from "../components/QuizOptions";
 import { useSelector } from "react-redux"
 import QuestionList from "../components/QuestionList";
+import HighScoreForm from "../components/HighScoreForm";
 
 
 function QuizPage() {
@@ -24,13 +25,23 @@ function QuizPage() {
         return state.quiz.userScore
     })
 
+    let content
+
+    if (showQuiz && !complete) {
+        content = <QuestionList />
+    }
+    else if (complete) {
+        content = <div>
+            <div>Total Score: {userScore} / {totalQuestions}  </div>
+            <HighScoreForm />
+        </div>
+    }
 
     return (
         <>
             <QuizOptions />
-            {showQuiz && !complete && <QuestionList />}
 
-            {complete && <div>Total Score: {complete ? `${userScore} / ${totalQuestions}` : ''}  </div>}
+            {content}
         </>
     )
 }
