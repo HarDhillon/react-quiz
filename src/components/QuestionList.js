@@ -24,7 +24,7 @@ function QuestionList() {
                 dispatch(changeQuestionTimeLeft(15));
             }, 2000);
         }
-    }, [timeLeftStore, selectedChoice]);
+    }, [timeLeftStore, selectedChoice, dispatch]);
 
     // Grab our Quiz Config State and fetch questions with our API
     const { amount, category, difficulty, type } = useSelector((state) => state.config);
