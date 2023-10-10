@@ -8,9 +8,9 @@ const highScoresApi = createApi({
     endpoints(builder) {
         return {
             fetchHighScores: builder.query({
-                query: () => {
+                query: (difficulty) => {
                     return {
-                        url: "/highscores",
+                        url: `/${difficulty}`,
                         method: "GET"
                     }
                 }
@@ -21,3 +21,6 @@ const highScoresApi = createApi({
     }
 })
 
+export const { useFetchHighScoresQuery } = highScoresApi
+
+export { highScoresApi }
