@@ -14,13 +14,24 @@ const highScoresApi = createApi({
                         method: "GET"
                     }
                 }
-            })
+            }),
 
-            // TODO Post High Score
+            postHighScore: builder.mutation({
+                query: (data) => {
+                    return {
+                        url: `/${data.difficulty}`,
+                        body: {
+                            initials: data.initials,
+                            score: data.score
+                        },
+                        method: "POST"
+                    }
+                }
+            })
         }
     }
 })
 
-export const { useFetchHighScoresQuery } = highScoresApi
+export const { useFetchHighScoresQuery, usePostHighScoreMutation } = highScoresApi
 
 export { highScoresApi }
