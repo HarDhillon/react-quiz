@@ -3,8 +3,6 @@ import { useFetchHighScoresQuery } from "../store"
 
 function HighScorePage() {
 
-    // TODO Tabs for Any, Easy, Medium, Hard which fetch scores for that difficulty
-
     const difficulty = "easy"
 
     const { data, isFetching, error } = useFetchHighScoresQuery(difficulty)
@@ -22,8 +20,15 @@ function HighScorePage() {
         scores = <HighScoreTable users={data} />
     }
 
+    // TODO
+    // <TabsContainer>
+    //  <TabItem title={"easy"}> <HighScoreTable users={}></HighScoreTable> </TabItem>
+    //  <TabItem title={"medium"}> <HighScoreTable users={}></HighScoreTable> </TabItem>
+    // </TabsContainer >
+
     return (
-        <div>High Score Page
+        <div>
+            High Score Page
             <div>{scores}</div>
         </div>
     )

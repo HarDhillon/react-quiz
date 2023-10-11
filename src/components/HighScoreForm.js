@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import Button from './Button'
+import { usePostHighScoreMutation } from '../store'
+import { useDispatch } from "react-redux";
 
 function HighScoreForm() {
+
+    const dispatch = useDispatch()
 
     const [name, setName] = useState('')
 
