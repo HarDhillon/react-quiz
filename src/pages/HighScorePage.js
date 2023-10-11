@@ -3,9 +3,7 @@ import { useFetchHighScoresQuery } from "../store"
 
 function HighScorePage() {
 
-    const difficulty = "easy"
-
-    const { data, isFetching, error } = useFetchHighScoresQuery(difficulty)
+    const { data, isFetching, error } = useFetchHighScoresQuery()
 
     let scores
 
@@ -17,7 +15,8 @@ function HighScorePage() {
         scores = <div>Loading....</div>
     }
     else {
-        scores = <HighScoreTable users={data} />
+        console.log(data)
+        scores = <HighScoreTable users={data.easy} />
     }
 
     // TODO
