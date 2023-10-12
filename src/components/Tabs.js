@@ -1,4 +1,5 @@
 import { useState } from "react"
+import HighScoreTable from "./HighScoreTable"
 
 function Tabs({ items }) {
 
@@ -10,20 +11,20 @@ function Tabs({ items }) {
 
     const renderedItems = items.map((item, index) => {
 
-        const currentTab = index === activeIndex
+        const activeTab = index === activeIndex
 
         return (
-            <div onClick={() => handleClick(index)} key={item.label}>
+            <div onClick={() => handleClick(index)} key={item.label} className="cursor-pointer">
                 <h3>{item.label}</h3>
                 <div>
-                    {currentTab && item.content}
+                    {activeTab && <HighScoreTable users={item.content} />}
                 </div>
             </div>
         )
     })
 
     return (
-        <div>{renderedItems}</div>
+        <div className="flex justify-between">{renderedItems}</div>
     )
 }
 

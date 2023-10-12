@@ -1,3 +1,4 @@
+import HighScoreTab from "../components/HighScoreTab"
 import HighScoreTable from "../components/HighScoreTable"
 import { useFetchHighScoresQuery } from "../store"
 
@@ -28,7 +29,7 @@ function HighScorePage() {
     return (
         <div>
             High Score Page
-            <div>{scores}</div>
+            <HighScoreTab />
         </div>
     )
 }
