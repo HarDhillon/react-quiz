@@ -4,6 +4,7 @@ import HighScoreTable from "./HighScoreTable"
 function Tabs({ items }) {
 
     const [activeIndex, setActiveIndex] = useState(0)
+    const activeItem = items[activeIndex].content
 
     const handleClick = (index) => {
         setActiveIndex(index)
@@ -11,20 +12,27 @@ function Tabs({ items }) {
 
     const renderedItems = items.map((item, index) => {
 
-        const activeTab = index === activeIndex
-
         return (
-            <div onClick={() => handleClick(index)} key={item.label} className="cursor-pointer">
-                <h3>{item.label}</h3>
-                <div>
-                    {activeTab && <HighScoreTable users={item.content} />}
+            <div>
+                <div onClick={() => handleClick(index)} key={item.label} className={`cursor-pointer ${index === activeIndex ? 'active' : ''}`}>
+                    <h3>{item.label}</h3>
                 </div>
             </div>
         )
     })
 
     return (
-        <div className="flex justify-between">{renderedItems}</div>
+        <div className="flex justify-center">
+            <div>
+                <div className="labels flex justify-between mb-10">
+                    {renderedItems}
+                </div>
+                <div className="content flex justify-center">
+                    <HighScoreTable users={activeItem} />
+                </div>
+
+            </div>
+        </div>
     )
 }
 
