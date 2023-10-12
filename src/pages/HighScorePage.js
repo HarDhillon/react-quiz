@@ -16,7 +16,6 @@ function HighScorePage() {
         scores = <div>Loading....</div>
     }
     else {
-        console.log(data)
         scores = <HighScoreTable users={data.easy} />
     }
 

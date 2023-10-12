@@ -1,13 +1,18 @@
 import { useState } from 'react'
 import Button from './Button'
 import { usePostHighScoreMutation } from '../store'
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux"
 
 function HighScoreForm() {
 
-    const dispatch = useDispatch()
+    const [postScore, results] = usePostHighScoreMutation()
 
     const [name, setName] = useState('')
+
+    const userScore = useSelector((state) => {
+        return state.quiz.userScore
+    })
+    const { difficulty } = useSelector((state) => state.config);
 
     const handleChange = (e) => {
         const value = e.target.value.toUpperCase()
@@ -18,8 +23,15 @@ function HighScoreForm() {
         setName(initials)
     }
 
+    // TODO fix posting to DB - may need to change structure of DB
     const handleSubmit = (e) => {
         e.preventDefault()
+        postScore({
+            difficulty: difficulty,
+            initials: name,
+            score: userScore
+        })
+
     }
 
     return (
@@ -29,7 +41,7 @@ function HighScoreForm() {
                 <label>Initials</label>
                 <input placeholder='H.S.D' type='text' value={name} onChange={handleChange} className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black" />
 
-                <Button className={"mt-3"} success >Submit High Score</Button>
+                <Button loading={results.isLoading} className={"mt-3"} success >Submit High Score</Button>
             </form>
 
         </div >

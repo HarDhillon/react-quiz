@@ -13,10 +13,8 @@ function Tabs({ items }) {
     const renderedItems = items.map((item, index) => {
 
         return (
-            <div>
-                <div onClick={() => handleClick(index)} key={item.label} className={`cursor-pointer px-3 py-2 ${index === activeIndex ? 'active-tab' : ''}`}>
-                    <h3>{item.label}</h3>
-                </div>
+            <div onClick={() => handleClick(index)} key={item.label} className={`cursor-pointer px-3 py-2 ${index === activeIndex ? 'active-tab' : ''}`}>
+                <h3>{item.label}</h3>
             </div>
         )
     })
