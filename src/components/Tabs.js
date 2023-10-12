@@ -14,7 +14,7 @@ function Tabs({ items }) {
 
         return (
             <div>
-                <div onClick={() => handleClick(index)} key={item.label} className={`cursor-pointer ${index === activeIndex ? 'active' : ''}`}>
+                <div onClick={() => handleClick(index)} key={item.label} className={`cursor-pointer px-3 py-2 ${index === activeIndex ? 'active-tab' : ''}`}>
                     <h3>{item.label}</h3>
                 </div>
             </div>

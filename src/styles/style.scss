@@ -30,28 +30,28 @@ body{
 }
 
 @keyframes countdown {
-    0% {
-      stroke-dashoffset: 0px;
-      stroke: green
-    }
-    15%{
-        stroke: green;
-    }
-    33%{
-        stroke: orange;
-    }
-    45%{
-        stroke: orange;
-    }
-    66%{
-        stroke: red;
-    }
-    100% {
-        stroke: red;
-      stroke-dashoffset: 113px;
-      stroke: rgb(42, 34, 34)(34, 28, 28);
-    }
+  0% {
+    stroke-dashoffset: 0px;
+    stroke: green
   }
+  15%{
+      stroke: green;
+  }
+  33%{
+      stroke: orange;
+  }
+  45%{
+      stroke: orange;
+  }
+  66%{
+      stroke: red;
+  }
+  100% {
+      stroke: red;
+    stroke-dashoffset: 113px;
+    stroke: rgb(42, 34, 34)(34, 28, 28);
+  }
+}
 
   .easy{
     color: green;
@@ -63,4 +63,8 @@ body{
 
   .hard{
     color: red;
+  }
+
+  .active-tab{
+    border-bottom: 2px solid #009879
   }

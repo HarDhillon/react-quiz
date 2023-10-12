@@ -11,9 +11,9 @@ function HighScoreTable({ users }) {
     })
 
     return (
-        <table className="min-w-[500px]">
+        <table className="min-w-[500px] border-b-2 border-[#009879] shadow-[0_0_20px_rgba(0,0,0,0.15)]">
             <thead className="bg-[#009879]">
-                <tr className="text-white p-5 rounded">
+                <tr className="text-white p-5">
                     <th className="p-3">Position</th>
                     <th className="p-3">Initials</th>
                     <th className="p-3">Score</th>
