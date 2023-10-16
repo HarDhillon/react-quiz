@@ -7,7 +7,16 @@ const highScoresApi = createApi({
     }),
     endpoints(builder) {
         return {
+            // TODO separate fetch quieries to invalidate correctly since JSON-Server only allows us to post and fetch
+            // A single level deep
+
             fetchHighScores: builder.query({
+
+                providesTags: (result, error, difficulty) => {
+                    const tag = [{ type: "Difficulty", difficulty }]
+                    return tag
+                },
+
                 query: (difficulty) => {
                     return {
                         url: `/${difficulty}`,
@@ -17,6 +26,11 @@ const highScoresApi = createApi({
             }),
 
             postHighScore: builder.mutation({
+
+                invalidatesTags: (result, error, data) => {
+                    return [{ type: "Difficulty", difficulty: data.difficulty }]
+                },
+
                 query: (data) => {
                     return {
                         url: `/${data.difficulty}`,
