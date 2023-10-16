@@ -23,7 +23,9 @@ function HighScoreForm() {
         setName(initials)
     }
 
-    // TODO fix posting to DB - may need to change structure of DB
+    // SEE (https://stackoverflow.com/questions/68378123/unable-to-get-nested-array-of-objects-from-json-server)
+    // "JSON-Server don't have the provision to access the nested resource"
+
     const handleSubmit = (e) => {
         e.preventDefault()
         postScore({

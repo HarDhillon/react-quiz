@@ -8,9 +8,9 @@ const highScoresApi = createApi({
     endpoints(builder) {
         return {
             fetchHighScores: builder.query({
-                query: () => {
+                query: (difficulty) => {
                     return {
-                        url: `/leaderboard`,
+                        url: `/${difficulty}`,
                         method: "GET"
                     }
                 }
@@ -19,9 +19,9 @@ const highScoresApi = createApi({
             postHighScore: builder.mutation({
                 query: (data) => {
                     return {
-                        url: `/leaderboard/${data.difficulty}`,
+                        url: `/${data.difficulty}`,
                         body: {
-                            initials: data.initials,
+                            name: data.initials,
                             score: data.score
                         },
                         method: "POST"
