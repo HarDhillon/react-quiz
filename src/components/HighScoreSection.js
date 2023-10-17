@@ -1,4 +1,4 @@
-import HighScoreTab from "../components/HighScoreTab"
+import HighScoreTab from "./HighScoreTab"
 
 function HighScorePage() {
 
