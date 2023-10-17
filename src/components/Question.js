@@ -1,6 +1,6 @@
 import { GoCheckCircle, GoXCircle } from "react-icons/go";
 import Card from "./Card";
-
+import DOMPurify from 'dompurify';
 import { useSelector } from "react-redux";
 import QuestionTimer from "./QuestionTimer";
 
@@ -8,6 +8,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
 
     const timeLeft = useSelector((state) => state.quiz.questionTimeLeft);
 
+    const sanitizedQuestion = DOMPurify.sanitize(question.question)
 
     const handleClick = (choice) => {
         if (timeLeft > 0) {
@@ -20,11 +21,11 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
         // Determine if this choice is the correct answer or not
         const isCorrect = choice === question.correct_answer;
 
+        const sanitizedChoice = DOMPurify.sanitize(choice)
 
         return <div
             className={`hover:cursor-pointer hover:bg-gray-300 ${isCorrect && selectedChoice ? 'text-green-500 text-lg mt-2 mb-2' : ''}${selectedChoice && !isCorrect ? 'text-red-500' : ''}`}
-            onClick={() => handleClick(choice)} key={index}>{choice}
-        </div>
+            onClick={() => handleClick(choice)} key={index} dangerouslySetInnerHTML={{ __html: sanitizedChoice }} />
     })
 
     const cardClass = userCorrect && selectedChoice ? 'bg-green-100' : selectedChoice && !userCorrect ? 'bg-red-100' : '';
@@ -45,7 +46,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
                     </div>
                 </div>
                 <div className="flex mb-5 mt-5 justify-center">
-                    <h5 className="text-lg font-bold">{question.question}</h5>
+                    <h5 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: sanitizedQuestion }} />
                     <p className="ml-2">{userCorrect && selectedChoice ? <GoCheckCircle className="text-2xl text-green-600" /> : ""}{selectedChoice && !userCorrect ? <GoXCircle className="text-2xl text-red-600" /> : ''} </p>
                 </div>
                 <div>{renderedChoices} </div>

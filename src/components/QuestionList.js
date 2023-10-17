@@ -57,8 +57,10 @@ function QuestionList() {
         } else if (isFetching) {
             return [];
         } else {
+
             // For each object shuffle the choices and return and object with the question and shuffled choices
             return data.results.map((question) => {
+
                 const choices = [question.correct_answer, ...question.incorrect_answers];
                 const shuffledChoices = shuffleArray(choices);
 

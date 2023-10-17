@@ -3,48 +3,39 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const highScoresApi = createApi({
     reducerPath: "highScore",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:3005"
+        baseUrl: "http://localhost:3005",
     }),
     endpoints(builder) {
         return {
-            // TODO separate fetch quieries to invalidate correctly since JSON-Server only allows us to post and fetch
-            // A single level deep
-
             fetchHighScores: builder.query({
-
-                providesTags: (result, error, difficulty) => {
-                    const tag = [{ type: "Difficulty", difficulty }]
-                    return tag
-                },
-
+                providesTags: ['HighScores'],
                 query: (difficulty) => {
                     return {
                         url: `/${difficulty}`,
-                        method: "GET"
-                    }
-                }
+                        method: "GET",
+                    };
+                },
             }),
 
             postHighScore: builder.mutation({
-
-                invalidatesTags: (result, error, data) => {
-                    return [{ type: "Difficulty", difficulty: data.difficulty }]
-                },
-
+                invalidatesTags: (result, error, difficulty) => [
+                    { type: "HighScores" }
+                ],
                 query: (data) => {
                     return {
                         url: `/${data.difficulty}`,
                         body: {
                             name: data.initials,
-                            score: data.score
+                            score: data.score,
                         },
-                        method: "POST"
-                    }
-                }
-            })
-        }
-    }
-})
+                        method: "POST",
+                    };
+                },
+            }),
+        };
+    },
+});
+
 
 export const { useFetchHighScoresQuery, usePostHighScoreMutation } = highScoresApi
 
