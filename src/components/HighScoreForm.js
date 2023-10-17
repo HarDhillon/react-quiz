@@ -39,13 +39,15 @@ function HighScoreForm() {
     }
 
     return (
-        <div>
-            <h3>Submit your high score</h3>
+        <div className='p-5'>
+            <h3 className='mb-6 font-bold text-xl'>Submit your high score</h3>
             <form onSubmit={handleSubmit}>
-                <label>Initials</label>
-                <input placeholder='H.S.D' type='text' value={name} onChange={handleChange} className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black" />
+                <div className='form-field'>
+                    <label>Initials</label>
+                    <input placeholder='H.S.D' type='text' value={name} onChange={handleChange} className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black max-w-xs" />
+                </div>
 
-                <Button loading={results.isLoading} className={"mt-3"} success >Submit High Score</Button>
+                <Button disabled={name === ''} loading={results.isLoading} className={"mt-6"} success >Submit High Score</Button>
             </form>
 
         </div >

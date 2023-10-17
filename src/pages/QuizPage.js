@@ -33,7 +33,7 @@ function QuizPage() {
     }
     else if (complete) {
         content = <div>
-            <div className="mt-5">Total Score: {userScore} / {totalQuestions}  </div>
+            <div className="mt-8 text-center"><span className="px-4 py-2 rounded text-white bg-[#0E1111]">Total Score: {userScore} / {totalQuestions}  </span></div>
             <HighScoreForm />
 
             <HighScoreSection />

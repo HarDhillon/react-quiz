@@ -134,7 +134,7 @@ function SelectList() {
 
 
 
-                <Button>Generate Questions</Button>
+                <Button className={"hover:bg-gray-200 transition-colors"}>Generate Questions</Button>
             </form>
 
         </Panel>

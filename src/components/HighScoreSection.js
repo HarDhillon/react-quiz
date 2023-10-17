@@ -4,7 +4,6 @@ function HighScoreSection() {
 
     return (
         <div>
-            High Score Page
             <HighScoreTab />
         </div>
     )

@@ -27,11 +27,12 @@ function Button({
             "text-green-500": outline && success,
             "text-yellow-400": outline && warning,
             "text-red-500": outline && danger,
+            "bg-green-200 border-green-200": disabled
         })
     );
 
     return (
-        <button {...rest} className={classes}>
+        <button disabled={disabled} {...rest} className={classes}>
             {children}
         </button>
     );
