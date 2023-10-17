@@ -2,7 +2,7 @@ import QuizOptions from "../components/QuizOptions";
 import { useSelector } from "react-redux"
 import QuestionList from "../components/QuestionList";
 import HighScoreForm from "../components/HighScoreForm";
-import HighScorePage from "./HighScorePage";
+import HighScoreSection from "../components/HighScoreSection";
 
 
 function QuizPage() {
@@ -33,10 +33,10 @@ function QuizPage() {
     }
     else if (complete) {
         content = <div>
-            <div>Total Score: {userScore} / {totalQuestions}  </div>
+            <div className="mt-5">Total Score: {userScore} / {totalQuestions}  </div>
             <HighScoreForm />
 
-            <HighScorePage />
+            <HighScoreSection />
         </div>
     }
 

@@ -1,6 +1,6 @@
 import HighScoreTab from "./HighScoreTab"
 
-function HighScorePage() {
+function HighScoreSection() {
 
     return (
         <div>
@@ -10,4 +10,4 @@ function HighScorePage() {
     )
 }
 
-export default HighScorePage
+export default HighScoreSection
