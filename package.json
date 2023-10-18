@@ -2,7 +2,7 @@
   "name": "quiz",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://hardhillon.github.io/react-quiz/" ,
+  "homepage": "https://hardhillon.github.io/react-quiz/" ,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",
