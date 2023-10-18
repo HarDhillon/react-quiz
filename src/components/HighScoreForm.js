@@ -47,7 +47,7 @@ function HighScoreForm() {
                     <input placeholder='H.S.D' type='text' value={name} onChange={handleChange} className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black max-w-xs" />
                 </div>
 
-                <Button disabled={name === ''} loading={results.isLoading} className={"mt-6"} success >Submit High Score</Button>
+                <Button disabled={name === ''} loading={results.isLoading.toString()} className={"mt-6"} success >Submit High Score</Button>
             </form>
 
         </div >

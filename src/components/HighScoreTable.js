@@ -3,11 +3,11 @@ function HighScoreTable({ users }) {
     const sortedUsers = [...users].sort((a, b) => b.score - a.score)
 
     const renderedScores = sortedUsers.map((user, index) => {
-        return <tr key={user.id} className="odd:bg-gray-100 even:bg-gray-300">
+        return <tr key={index} className="odd:bg-gray-100 even:bg-gray-300">
             <td className="text-center py-3">{index + 1}</td>
             <td className="text-center py-3">{user.name}</td>
             <td className="text-center py-3">{user.score}</td>
-        </tr>
+        </tr >
     })
 
     return (
