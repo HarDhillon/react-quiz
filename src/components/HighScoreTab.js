@@ -1,6 +1,7 @@
 import React from "react";
 import { useFetchHighScoresQuery } from "../store";
 import Tabs from "./Tabs";
+import Info from "./Info";
 
 function HighScoreTab() {
     // Call useFetchHighScoresQuery for different difficulty levels since JSON-Server does not support nested Get or Post calls
@@ -28,7 +29,12 @@ function HighScoreTab() {
         },
     ];
 
-    return <Tabs items={tabItems} />;
+    return <div className="flex justify-center">
+        <Tabs className={"relative"} items={tabItems}>
+            <Info className={"-right-10 top-3"} content={"High scores are currently stored with json-server locally and so may only be available from time to time"} />
+        </Tabs>
+    </div>
+
 }
 
 export default HighScoreTab;

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import HighScoreTable from "./HighScoreTable"
 
-function Tabs({ items }) {
+function Tabs({ items, children, className }) {
 
     // console.log(items)
 
@@ -22,17 +22,17 @@ function Tabs({ items }) {
     })
 
     return (
-        <div className="flex justify-center">
-            <div>
-                <div className="labels flex justify-between mb-10">
-                    {renderedItems}
-                </div>
-                <div className="content flex justify-center">
-                    <HighScoreTable users={activeItem} />
-                </div>
-
+        <div className={className}>
+            <div className="labels flex justify-between mb-10">
+                {renderedItems}
             </div>
+            <div className="content flex justify-center">
+                <HighScoreTable users={activeItem} />
+            </div>
+
+            {children}
         </div>
+
     )
 }
 
