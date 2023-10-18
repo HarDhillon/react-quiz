@@ -24,11 +24,13 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
         const sanitizedChoice = DOMPurify.sanitize(choice)
 
         return <div
-            className={`hover:cursor-pointer hover:bg-gray-300 ${isCorrect && selectedChoice ? 'text-green-500 text-lg mt-2 mb-2' : ''}${selectedChoice && !isCorrect ? 'text-red-500' : ''}`}
-            onClick={() => handleClick(choice)} key={index} dangerouslySetInnerHTML={{ __html: sanitizedChoice }} />
+            key={index} >
+            <p className={`hover:cursor-pointer hover:bg-gray-200 rounded border mb-5 py-2 px-5 inline-block min-w-[30%] max-w-[60%] ${isCorrect && selectedChoice ? 'bg-green-500 hover:bg-green-500' : ''}${selectedChoice && !isCorrect ? 'bg-red-500 hover:bg-red-500 text-white' : ''}`}
+                onClick={() => handleClick(choice)} dangerouslySetInnerHTML={{ __html: sanitizedChoice }} />
+        </div>
     })
 
-    const cardClass = userCorrect && selectedChoice ? 'bg-green-100' : selectedChoice && !userCorrect ? 'bg-red-100' : '';
+    // const cardClass = userCorrect && selectedChoice ? 'bg-green-100' : selectedChoice && !userCorrect ? 'bg-red-100' : '';
 
     return (
         <div>
@@ -38,7 +40,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
             </div>
 
 
-            <Card className={cardClass} userCorrect={userCorrect} selectedChoice={selectedChoice}>
+            <Card className={"relative"} userCorrect={userCorrect} selectedChoice={selectedChoice}>
                 <div className="flex justify-between">
                     {selectedChoice && timeLeft !== 0 ? <div></div> : timeLeft !== 0 ? <QuestionTimer /> : <h3 className="font-bold text-left">Times Up!</h3>}
                     <div className="border border-black rounded py-1.5 px-4">
@@ -47,9 +49,9 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
                 </div>
                 <div className="flex mb-5 mt-5 justify-center">
                     <h5 className="text-lg font-bold" dangerouslySetInnerHTML={{ __html: sanitizedQuestion }} />
-                    <p className="ml-2">{userCorrect && selectedChoice ? <GoCheckCircle className="text-2xl text-green-600" /> : ""}{selectedChoice && !userCorrect ? <GoXCircle className="text-2xl text-red-600" /> : ''} </p>
+                    <p className="ml-2 text-6xl absolute top-3">{userCorrect && selectedChoice ? <GoCheckCircle className="text-green-600" /> : ""}{selectedChoice && !userCorrect ? <GoXCircle className="text-red-600" /> : ''} </p>
                 </div>
-                <div>{renderedChoices} </div>
+                <div className="flex flex-col">{renderedChoices} </div>
 
 
             </Card>
