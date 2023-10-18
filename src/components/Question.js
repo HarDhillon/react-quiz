@@ -25,7 +25,7 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
 
         return <div
             key={index} >
-            <p className={`hover:cursor-pointer hover:bg-gray-200 rounded border mb-5 py-2 px-5 inline-block min-w-[30%] max-w-[60%] ${isCorrect && selectedChoice ? 'bg-green-500 hover:bg-green-500' : ''}${selectedChoice && !isCorrect ? 'bg-red-500 hover:bg-red-500 text-white' : ''}`}
+            <p className={`hover:cursor-pointer hover:bg-gray-200 rounded border border-black mb-5 py-2 px-5 inline-block min-w-[30%] max-w-[60%] ${isCorrect && selectedChoice ? 'bg-green-500 hover:bg-green-500' : ''}${selectedChoice && !isCorrect ? 'bg-red-500 hover:bg-red-500 text-white' : ''}`}
                 onClick={() => handleClick(choice)} dangerouslySetInnerHTML={{ __html: sanitizedChoice }} />
         </div>
     })
