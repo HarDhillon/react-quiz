@@ -22,7 +22,7 @@ function QuestionList() {
             setTimeout(() => {
                 dispatch(changeQuestionsAnswered());
                 dispatch(changeQuestionTimeLeft(15));
-            }, 2000);
+            }, 3000);
         }
     }, [timeLeftStore, selectedChoice, dispatch]);
 
