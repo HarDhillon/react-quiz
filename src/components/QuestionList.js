@@ -4,6 +4,7 @@ import { useFetchQuestionsQuery } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import { useMemo, useState, useEffect } from "react";
 import { changeQuestionTimeLeft, changeUserScore, changeQuestionsAnswered } from "../store";
+import { BiLoaderCircle } from "react-icons/bi"
 
 function QuestionList() {
 
@@ -94,7 +95,7 @@ function QuestionList() {
             {/* Display error message if there is an error */}
             {error && <div>Error loading data</div>}
             {/* Display "Loading..." text while isFetching is true */}
-            {isFetching && <div>Loading...</div>}
+            {isFetching && <div className="mt-10 flex"><BiLoaderCircle className="text-2xl mr-2 animate-slow-spin" />Loading...</div>}
             {/* Render questions if there are no errors and not loading */}
             {!error && !isFetching && (
                 <div className="w-[80vw]">
