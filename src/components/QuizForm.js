@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { changeAmount, changeCategory, changeDifficulty, changeQuestionsAnswered, changeSubmitted, changeType, changeUserScore } from '../store'
 import Button from "./Button"
 import Panel from "./Panel"
+import { GoArrowDown, GoArrowUp } from "react-icons/go"
+import { useState } from "react"
 
 
 function QuizForm() {
@@ -44,6 +46,11 @@ function QuizForm() {
         { value: "any", label: "Any" }, { value: "multiple", label: "Multiple Choice" }, { value: "boolean", label: "True / False" }
     ]
 
+    const [isExpanded, setIsExpanded] = useState(true)
+
+    const handleClick = () => {
+        setIsExpanded(!isExpanded)
+    }
 
     const dispatch = useDispatch()
 
@@ -90,6 +97,7 @@ function QuizForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(changeSubmitted(true))
+        setIsExpanded(false)
     }
 
 
@@ -105,38 +113,45 @@ function QuizForm() {
         return <option onClick={handleTypeclick} key={item.value} value={item.value}>{item.label}</option>
     })
 
+    const icon = (
+        <span className="text-2xl">
+            {isExpanded ? <GoArrowUp /> : <GoArrowDown />}
+        </span>
+    );
+
 
     return (
-        <Panel className={"p-5"}>
-            <form onSubmit={handleSubmit}>
-                <div className="flex flex-wrap justify-between mb-4">
-                    <div className="form-field">
-                        <label>Number of Questions (1 - 50)</label>
-                        <input className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black" value={amount || 1} onChange={handleNumberChange}></input>
+        <Panel className={"p-5 relative"}>
+            {isExpanded && (
+                <form onSubmit={handleSubmit}>
+                    <div className="flex flex-wrap justify-between mb-4">
+                        <div className="form-field">
+                            <label>Number of Questions (1 - 50)</label>
+                            <input className="p-1 border-2 border-gray-500 focus:outline-none focus:border-black" value={amount || 1} onChange={handleNumberChange}></input>
+                        </div>
+
+                        <div className="form-field">
+                            <label>Category</label>
+                            <select className="p-3">{categoryItems}</select>
+                        </div>
+
+                        <div className="form-field">
+                            <label>Difficulty</label>
+                            <select className="p-3">{difficultyItems}</select>
+                        </div>
+
+                        <div className="form-field">
+                            <label>Type</label>
+                            <select className="p-3">{typeItems}</select>
+                        </div>
+
                     </div>
 
-                    <div className="form-field">
-                        <label>Category</label>
-                        <select className="p-3">{categoryItems}</select>
-                    </div>
+                    <Button className={"hover:bg-gray-200 transition-colors"}>Generate Questions</Button>
+                </form>
 
-                    <div className="form-field">
-                        <label>Difficulty</label>
-                        <select className="p-3">{difficultyItems}</select>
-                    </div>
-
-                    <div className="form-field">
-                        <label>Type</label>
-                        <select className="p-3">{typeItems}</select>
-                    </div>
-
-                </div>
-
-
-
-                <Button className={"hover:bg-gray-200 transition-colors"}>Generate Questions</Button>
-            </form>
-
+            )}
+            <div onClick={handleClick} className="bg-gray-100 hover:bg-gray-300 hover:cursor-pointer absolute bottom-0 p-1 rounded-full border border-black left-1/2 -translate-x-1/2 translate-y-1/2">{icon}</div>
         </Panel>
 
     )
