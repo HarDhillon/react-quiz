@@ -30,8 +30,6 @@ function Question({ question, shuffledChoices, selectedChoice, userCorrect, hand
         </div>
     })
 
-    // const cardClass = userCorrect && selectedChoice ? 'bg-green-100' : selectedChoice && !userCorrect ? 'bg-red-100' : '';
-
     return (
         <div>
             <div className="flex justify-between mt-5 mb-5" >

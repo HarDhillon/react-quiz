@@ -3,8 +3,6 @@ import HighScoreTable from "./HighScoreTable"
 
 function Tabs({ items, children, className }) {
 
-    // console.log(items)
-
     const [activeIndex, setActiveIndex] = useState(0)
     const activeItem = items[activeIndex].content
 
