@@ -1,4 +1,4 @@
-import QuizOptions from "../components/QuizOptions";
+import QuizForm from "../components/QuizForm";
 import { useSelector } from "react-redux"
 import QuestionList from "../components/QuestionList";
 import HighScoreForm from "../components/HighScoreForm";
@@ -41,7 +41,7 @@ function QuizPage() {
 
     return (
         <>
-            <QuizOptions />
+            <QuizForm />
 
             {content}
         </>

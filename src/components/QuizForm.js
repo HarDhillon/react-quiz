@@ -4,7 +4,7 @@ import Button from "./Button"
 import Panel from "./Panel"
 
 
-function SelectList() {
+function QuizForm() {
 
     const optionsCategory = [
         { value: 'any', label: 'Any Category' },
@@ -142,4 +142,4 @@ function SelectList() {
     )
 }
 
-export default SelectList
+export default QuizForm
