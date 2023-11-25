@@ -93,7 +93,11 @@ function QuestionList() {
     return (
         <div className="flex flex-col grow items-center">
             {/* Display error message if there is an error */}
-            {error && <div>Error loading data</div>}
+            {error && <div>
+                Error loading data
+                <br></br><br></br>
+                <p className="text-sm text-gray-400">{error.error}</p>
+            </div>}
             {/* Display "Loading..." text while isFetching is true */}
             {isFetching && <div className="mt-10 flex"><BiLoaderCircle className="text-2xl mr-2 animate-slow-spin" />Loading...</div>}
             {/* Render questions if there are no errors and not loading */}
