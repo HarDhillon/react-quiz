@@ -1,0 +1,18 @@
+.quiz-form{
+    
+    overflow: hidden;
+
+    .form-field{
+        display: flex;
+        flex-direction: column;
+    
+        label{
+            margin-bottom: 10px;
+        }
+    }
+    
+    &.closed{
+        height: 0px;
+    }
+
+}
