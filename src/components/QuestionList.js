@@ -58,7 +58,10 @@ function QuestionList() {
         } else if (isFetching) {
             return [];
         } else {
-
+            if (data.response_code !== 0) {
+                console.log("Not enough info");
+                return [];  // You can also return an empty array or any other fallback
+            }
             // For each object shuffle the choices and return and object with the question and shuffled choices
             return data.results.map((question) => {
 
@@ -70,6 +73,7 @@ function QuestionList() {
                     shuffledChoices,
                 };
             });
+
         }
     }, [data, error, isFetching]);
 
@@ -100,8 +104,11 @@ function QuestionList() {
             </div>}
             {/* Display "Loading..." text while isFetching is true */}
             {isFetching && <div className="mt-10 flex"><BiLoaderCircle className="text-2xl mr-2 animate-slow-spin" />Loading...</div>}
+            {!isFetching && data && data.response_code !== 0 && (
+                <div className="mt-10">There are not enough questions for this selection</div>
+            )}
             {/* Render questions if there are no errors and not loading */}
-            {!error && !isFetching && (
+            {!error && !isFetching && data.response_code === 0 && (
                 <div className="w-[80vw]">
                     <Question
                         shuffledChoices={questionDetails.shuffledChoices}
